@@ -18,7 +18,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	var msg model.IteungMessage
 	var resp atmessage.Response
 	json.NewDecoder(r.Body).Decode(&msg)
-	link := "https://medium.com/@rofinafiisr/whatsauth-free-2fa-otp-notif-whatsapp-gateway-api-gratis-f540249cd050"
+	link := "https://medium.com/@farhanriziq01/membuat-whatsauth-free-2fa-otp-notif-dan-whatsapp-gateway-api-gratis-c6052c4fb407"
 	if r.Header.Get("Secret") == os.Getenv("SECRET") {
 		if msg.Message == "loc" || msg.Message == "Loc" || msg.Message == "lokasi" || msg.LiveLoc {
 			location, err := ReverseGeocode(msg.Latitude, msg.Longitude)
@@ -27,8 +27,8 @@ func Post(w http.ResponseWriter, r *http.Request) {
 				location = "Unknown Location"
 			}
 
-			reply := fmt.Sprintf("Hai hai haiii kamu pasti lagi di %s \n Koordinatenya : %s - %s\n Cara Penggunaan WhatsAuth Ada di link dibawah ini"+
-				"yaa kak %s\n", location,
+			reply := fmt.Sprintf("Aku ramal kamu psati berada di %s \n Koordinatenya : %s - %s\n Cara Penggunaan WhatsAuth Ada di link dibawah ini"+
+				" yaa %s\n", location,
 				strconv.Itoa(int(msg.Longitude)), strconv.Itoa(int(msg.Latitude)), link)
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,
@@ -38,15 +38,11 @@ func Post(w http.ResponseWriter, r *http.Request) {
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
 		} else {
 			randm := []string{
-				"Hai Hai Haiii kamuuuui " + msg.Alias_name + "\nrofinya lagi gaadaa \n aku giseuubott salam kenall yaaaa \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
-				"IHHH jangan SPAAM berisik tau giseu lagi tidur",
-				"Kamu ganteng tau",
-				"Ihhh kamu cantik banget",
-				"bro, mending beliin aku nasgor",
-				"Jangan galak galak dong kak, aku takut tauu",
-				"Mawar Indah hanya akan muncul dipagi hari, MAKANYA BANGUN PAGI KAK",
-				"Cihuyyyy hari ini giseuu bahagiaaa banget",
-				"Bercandyaaa berrcandyaaaa",
+				"Hai Hai Haiii kamuuuui " + msg.Alias_name + "\norangnya lagi ngebo \n bot vox dimari, ada bot vox jangan lari \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
+				"yang spam sok asik",
+				"lu cakep bro",
+				"kata gua mah kalo traktir temen tu dapet banyak pahala tau",
+				"nantangin boss??",
 			}
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,
