@@ -14,7 +14,7 @@ import (
 	"github.com/whatsauth/wa"
 )
 
-func Post(w http.ResponseWriter, r *http.Request) {
+func PostBalasan(w http.ResponseWriter, r *http.Request) {
 	var msg model.IteungMessage
 	var resp atmessage.Response
 	json.NewDecoder(r.Body).Decode(&msg)
@@ -36,13 +36,32 @@ func Post(w http.ResponseWriter, r *http.Request) {
 				Messages: reply,
 			}
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
+
+		} else if msg.Message == "Babi" || msg.Message == "Anjing" || msg.Message == "goblok" {
+			dt := &wa.TextMessage{
+				To:       msg.Phone_number,
+				IsGroup:  false,
+				Messages: fmt.Sprintf("Buset broo %s kasar amat, jagoan lu?", msg.Alias_name),
+			}
+			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
+
+		} else if msg.Message == "cantik" || msg.Message == "ganteng" || msg.Message == "cakep" {
+			dt := &wa.TextMessage{
+				To:       msg.Phone_number,
+				IsGroup:  false,
+				Messages: fmt.Sprintf("Tengkyu bro %s lu juga cakep kok, tapi masi cakepan gua kata emak gua", msg.Alias_name),
+			}
+			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
+
 		} else {
 			randm := []string{
-				"yooo wassup bro " + msg.Alias_name + "\norangnya lagi ngebo \nbot vox dimari, ada bot vox jangan lari \nCara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
+				"yooo wassup bro " + msg.Alias_name + "\norangnya lagi ngebo \nbot fox dimari, ada bot fox jangan lari \nCara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
 				"aku tau kok kamu jomblo, TAPI AKUNYA JANGAN DI SPAM JUGAA",
-				"lu cakep bro",
+				"kamu itu kaya batu, diem doang ga ngapa ngapain",
 				"kata gua mah kalo traktir temen tu dapet banyak pahala tau",
-				"nantangin boss??",
+				"bercanda bercanda, kali kali serius atuh_-",
+				"apa yang lebih sakit dari juara 2? \njadi second choise nya kamu",
+				"info duit ngalir dong bang",
 			}
 			dt := &wa.TextMessage{
 				To:       msg.Phone_number,
