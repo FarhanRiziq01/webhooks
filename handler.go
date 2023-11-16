@@ -27,7 +27,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 				location = "Unknown Location"
 			}
 
-			reply := fmt.Sprintf("Aku ramal kamu pasti berada di %s \n Koordinatenya : %s - %s\n Cara Penggunaan WhatsAuth Ada di link dibawah ini"+
+			reply := fmt.Sprintf("Aku ramal kamu pasti berada di %s \nKoordinatenya : %s - %s\nCara Penggunaan WhatsAuth Ada di link dibawah ini"+
 				" yaa %s\n", location,
 				strconv.Itoa(int(msg.Longitude)), strconv.Itoa(int(msg.Latitude)), link)
 			dt := &wa.TextMessage{
@@ -38,8 +38,8 @@ func Post(w http.ResponseWriter, r *http.Request) {
 			resp, _ = atapi.PostStructWithToken[atmessage.Response]("Token", os.Getenv("TOKEN"), dt, "https://api.wa.my.id/api/send/message/text")
 		} else {
 			randm := []string{
-				"yooo wassup dude " + msg.Alias_name + "\norangnya lagi ngebo \n bot vox dimari, ada bot vox jangan lari \n Cara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
-				"yang spam sok asik",
+				"yooo wassup bro " + msg.Alias_name + "\norangnya lagi ngebo \nbot vox dimari, ada bot vox jangan lari \nCara penggunaan WhatsAuth ada di link berikut ini ya kak...\n" + link,
+				"aku tau kok kamu jomblo, TAPI AKUNYA JANGAN DI SPAM JUGAA",
 				"lu cakep bro",
 				"kata gua mah kalo traktir temen tu dapet banyak pahala tau",
 				"nantangin boss??",
@@ -96,7 +96,7 @@ func Liveloc(w http.ResponseWriter, r *http.Request) {
 		location = "Unknown Location"
 	}
 
-	reply := fmt.Sprintf("Aku ramal kamu pasti berada di %s \n Koordinatenya : %s - %s\n", location,
+	reply := fmt.Sprintf("Aku ramal kamu pasti berada di %s \nKoordinatenya : %s - %s\n", location,
 		strconv.Itoa(int(msg.Longitude)), strconv.Itoa(int(msg.Latitude)))
 
 	if r.Header.Get("Secret") == os.Getenv("SECRET") {
